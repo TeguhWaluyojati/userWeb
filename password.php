@@ -36,7 +36,7 @@ $query  = "UPDATE karyawan SET pass='$password_baru' WHERE nidn='$nidn'";
 $sql = mysqli_query($db_handle, $query);
 //setelah berhasil update
 if ($sql) {
-    header ("Location: password.php?error=Password Berhasil di ubah!");   
+    header ("Location: password.php?success=Password Berhasil di ubah!");   
     exit(); 
 } else {
     header ("Location: password.php?error=Password Gagal di ubah!");  
@@ -49,6 +49,14 @@ if ($sql) {
 <html lang="en">
 <head>
 <style>
+    .success {
+    background: #2A9D8F;
+    color: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+
+}
       .error {
     background: #F2DEDE;
     color: #A94442;
@@ -56,6 +64,7 @@ if ($sql) {
     border-radius: 5px;
     margin: 20px auto;
 }
+
 </style>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -73,6 +82,9 @@ if ($sql) {
 				<div class="col-md-12 mt-5">
                 <?php if (isset ($_GET ['error'])){ ?>
             <p class="error"><?php echo $_GET['error'];?></p>
+        <?php }?>
+        <?php if (isset ($_GET ['success'])){ ?>
+            <p class="success"><?php echo $_GET['success'];?></p>
         <?php }?>
 					<form enctype="multipart/form-data" method="post" action="#">
                     <div class="mb-3">
@@ -101,6 +113,7 @@ if ($sql) {
 						</div>
 						<div class="mb-3 text-end">
 							<button type="submit" class="btn btn-success" name ="Ganti" value ="Ganti">Ganti Password</button>
+                            <a class="btn btn-secondary" href ="home.php" role ="button">Kembali</a>
 						</div>
 					</form>
 				</div>
